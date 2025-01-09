@@ -5,11 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.masantello.booksreviewsystem.domain.enums.Genrer;
 
+@Document(collection = "author")
 public class Author implements Serializable {
-
 	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private String id;
 	private String name;
 	private String email;

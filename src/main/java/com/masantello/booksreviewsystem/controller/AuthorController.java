@@ -21,8 +21,9 @@ public class AuthorController {
 	public ResponseEntity<List<Author>> findAll() {
 		Author a1 = new Author("1", "George Orwell", "georgeorwell@gmail.com", LocalDate.of(1903, 06, 25), Genrer.DYSTOPIAN);
 		Author a2 = new Author("2", "Kiera Cass", "kieracass@gmail.com", LocalDate.of(1981, 05, 19), Genrer.ROMANCE);
+		Author a3 = new Author("3", "Agatha Christie", "agathachristie@gmail.com", LocalDate.of(1890, 9, 15), Genrer.MISTERY);
 		List<Author> authors = new ArrayList<>();
-		authors.addAll(Arrays.asList(a1, a2));
+		authors.addAll(Arrays.asList(a1, a2, a3));
 		
 		return ResponseEntity.ok().body(authors);
 	}
