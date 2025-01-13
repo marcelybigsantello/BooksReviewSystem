@@ -7,7 +7,7 @@ public enum Genrer {
 	DYSTOPIAN(3, "Dystopian"),
 	ACTION(4, "Action"),
 	BIOGRAPHY(5, "Biography"),
-	MISTERY(6, "Mistery"),
+	MYSTERY(6, "Mystery"),
 	ROMANCE(7, "Romance"),
 	ADVENTURE(8, "Adventure"),
 	HISTORY(9, "History"),

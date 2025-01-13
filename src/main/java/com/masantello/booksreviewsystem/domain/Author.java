@@ -19,20 +19,20 @@ public class Author implements Serializable {
 	private String name;
 	private String email;
 	private LocalDate birthDate;
-	private Genrer gender;
+	private Genrer genrer;
 	private List<Book> books;
 	
 	public Author() {
 		
 	}
 
-	public Author(String id, String name, String email, LocalDate birthDate, Genrer gender) {
+	public Author(String id, String name, String email, LocalDate birthDate, Genrer genrer) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.birthDate = birthDate;
-		this.gender = gender;
+		this.genrer = genrer;
 	}
 
 	public String getId() {
@@ -67,12 +67,12 @@ public class Author implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public Genrer getGender() {
-		return gender;
+	public Genrer getGenrer() {
+		return genrer;
 	}
 
-	public void setGender(Genrer gender) {
-		this.gender = gender;
+	public void setGenrer(Genrer genrer) {
+		this.genrer = genrer;
 	}
 
 	public List<Book> getBooks() {
