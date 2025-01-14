@@ -1,6 +1,7 @@
 package com.masantello.booksreviewsystem.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masantello.booksreviewsystem.domain.Author;
+import com.masantello.booksreviewsystem.dto.AuthorDTO;
 import com.masantello.booksreviewsystem.services.AuthorService;
 
 @RestController
@@ -23,10 +25,11 @@ public class AuthorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Author>> findAll() {
+	public ResponseEntity<List<AuthorDTO>> findAll() {
 		List<Author> authors = service.findAll();
+		List<AuthorDTO> authorsDto = authors.stream().map(author -> new AuthorDTO(author)).collect(Collectors.toList());
 		
-		return ResponseEntity.ok().body(authors);
+		return ResponseEntity.ok().body(authorsDto);
 	}
 
 }
