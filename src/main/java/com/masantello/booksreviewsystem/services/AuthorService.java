@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masantello.booksreviewsystem.domain.Author;
+import com.masantello.booksreviewsystem.dto.AuthorDTO;
 import com.masantello.booksreviewsystem.repositories.AuthorRepository;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
 
@@ -31,5 +32,14 @@ public class AuthorService {
 		}
 		
 		return author.get();
+	}
+	
+	public Author insert(Author author) {
+		return authorRepository.insert(author);
+	}
+	
+	public Author fromDto(AuthorDTO authorDto) {
+		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
+				authorDto.getBirthDate(), authorDto.getGenrer());
 	}
 }
