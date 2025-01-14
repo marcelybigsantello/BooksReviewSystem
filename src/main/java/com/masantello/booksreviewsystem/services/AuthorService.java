@@ -1,12 +1,14 @@
 package com.masantello.booksreviewsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.repositories.AuthorRepository;
+import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
 
 @Service
 public class AuthorService {
@@ -20,5 +22,14 @@ public class AuthorService {
 	
 	public List<Author> findAll(){
 		return authorRepository.findAll();
+	}
+	
+	public Author findById(String id) {
+		Optional<Author> author = authorRepository.findById(id);
+		if (author.isEmpty()) {
+			throw new ObjectNotFoundException("Autor não encontrado");
+		}
+		
+		return author.get();
 	}
 }
