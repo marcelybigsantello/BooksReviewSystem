@@ -16,7 +16,7 @@ import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundExcepti
 public class AuthorService {
 
 	private final AuthorRepository authorRepository;
-	
+
 	@Autowired
 	public AuthorService(AuthorRepository authorRepository) {
 		this.authorRepository = authorRepository;
@@ -25,31 +25,43 @@ public class AuthorService {
 	public Author insert(Author author) {
 		return authorRepository.insert(author);
 	}
-	
-	public List<Author> findAll(){
+
+	public List<Author> findAll() {
 		return authorRepository.findAll();
 	}
-	
+
 	public Author findById(String id) {
 		Optional<Author> author = authorRepository.findById(id);
 		if (author.isEmpty()) {
 			throw new ObjectNotFoundException("Autor não encontrado");
 		}
-		
+
 		return author.get();
+	}
+
+	public Author update(Author author) {
+		Author newDataAuthor = findById(author.getId());
+		newDataAuthor.setName(author.getName());
+		newDataAuthor.setEmail(author.getEmail());
+		newDataAuthor.setBirthDate(author.getBirthDate());
+		newDataAuthor.setGenrer(author.getGenrer());
+		authorRepository.save(newDataAuthor);
+		return newDataAuthor;
 	}
 	
 	public void delete(String id) {
 		Author author = findById(id);
 		if (author.getBooks() != null && author.getBooks().size() > 0) {
-			throw new DataIntegrityViolationsException("O autor possui livros cadastrados. Não é possível excluí-lo");
+			throw new DataIntegrityViolationsException("O autor possui livros cadastrados. "
+					+ "Não é possível excluí-lo");
 		}
-		
+
 		authorRepository.delete(author);
 	}
-	
+
 	public Author fromDto(AuthorDTO authorDto) {
 		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
 				authorDto.getBirthDate(), authorDto.getGenrer());
 	}
+
 }

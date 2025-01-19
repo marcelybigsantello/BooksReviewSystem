@@ -51,6 +51,14 @@ public class AuthorController {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@PathVariable String id, @RequestBody AuthorDTO authorDto) {
+		Author author = service.fromDto(authorDto);
+		author.setId(id);
+		author = service.update(author);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<AuthorDTO> delete(@PathVariable String id) {
 		service.delete(id);
