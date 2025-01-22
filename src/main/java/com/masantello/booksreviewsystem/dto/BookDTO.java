@@ -1,14 +1,14 @@
-package com.masantello.booksreviewsystem.domain;
+package com.masantello.booksreviewsystem.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "book")
-public class Book implements Serializable {
+import com.masantello.booksreviewsystem.domain.Author;
+import com.masantello.booksreviewsystem.domain.Book;
+
+public class BookDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,18 +21,21 @@ public class Book implements Serializable {
 	private Float price;
 	private int quantityInSupply;
 	private Author author;
+
+	public BookDTO() {
+		
+	}
 	
-	public Book(String id, String title, String description, String editor, short numberOfPages, LocalDate releaseDate,
-			Float price, int quantityInSupply, Author author) {
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.editor = editor;
-		this.numberOfPages = numberOfPages;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.quantityInSupply = quantityInSupply;
-		this.author = author;
+	public BookDTO(Book book) {
+		this.id = book.getId();
+		this.title = book.getTitle();
+		this.description = book.getDescription();
+		this.editor = book.getEditor();
+		this.numberOfPages = book.getNumberOfPages();
+		this.releaseDate = book.getReleaseDate();
+		this.price = book.getPrice();
+		this.quantityInSupply = book.getQuantityInSupply();
+		this.author = book.getAuthor();
 	}
 
 	public String getId() {
@@ -106,22 +109,8 @@ public class Book implements Serializable {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Book other = (Book) obj;
-		return Objects.equals(id, other.id);
-	}
+	
+	
+	
 	
 }
