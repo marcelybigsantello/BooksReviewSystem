@@ -110,7 +110,5 @@ public class BookDTO implements Serializable {
 		this.author = author;
 	}
 	
-	
-	
-	
 }
+
