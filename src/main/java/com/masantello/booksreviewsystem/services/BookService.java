@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
 import com.masantello.booksreviewsystem.dto.BookDTO;
 import com.masantello.booksreviewsystem.repositories.AuthorRepository;
@@ -26,10 +27,11 @@ public class BookService {
 	}
 
 	public Book insert(Book book) {
-		/*Optional<Author> author = authorRepository.findById(book.getAuthor().getId());
+		Optional<Author> author = authorRepository.findByNameAndEmail(book.getAuthor().getName(), 
+				book.getAuthor().getEmail());
 		if (author.isEmpty()) {
 			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
-		}*/
+		}
 		return bookRepository.insert(book);
 	}
 
