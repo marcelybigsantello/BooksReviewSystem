@@ -27,12 +27,18 @@ public class BookService {
 	}
 
 	public Book insert(Book book) {
-		Optional<Author> author = authorRepository.findByNameAndEmail(book.getAuthor().getName(), 
+		Optional<Author> authorOp = authorRepository.findByNameAndEmail(book.getAuthor().getName(),
 				book.getAuthor().getEmail());
-		if (author.isEmpty()) {
+		if (authorOp.isEmpty()) {
 			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
 		}
-		return bookRepository.insert(book);
+
+		Author author = authorOp.get();
+		author.addBook(book);
+		var result = bookRepository.insert(book);
+		authorRepository.save(author);	
+
+		return result;
 	}
 
 	public List<Book> findAll() {
@@ -61,20 +67,20 @@ public class BookService {
 		bookRepository.save(newDataBook);
 		return newDataBook;
 	}
-	
+
 	public void delete(String id) {
 		Book book = findById(id);
 		if (book.getQuantityInSupply() > 0) {
-			throw new DataIntegrityViolationsException("Não é possível excluir o livro, "
-					+ "pois possui exemplares em estoque.");
+			throw new DataIntegrityViolationsException(
+					"Não é possível excluir o livro, " + "pois possui exemplares em estoque.");
 		}
 		bookRepository.delete(book);
 	}
 
 	public Book fromDto(BookDTO bookDto) {
 		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
-				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), 
-				bookDto.getQuantityInSupply(), bookDto.getAuthor());
+				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
+				bookDto.getAuthor());
 	}
 
 }

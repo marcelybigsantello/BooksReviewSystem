@@ -28,7 +28,6 @@ public class BookController {
 		this.bookService = bookService;
 	}
 	
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<BookDTO>> findAll() {
 		List<Book> books = bookService.findAll();

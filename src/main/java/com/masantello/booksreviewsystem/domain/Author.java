@@ -2,10 +2,12 @@ package com.masantello.booksreviewsystem.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.masantello.booksreviewsystem.domain.enums.Genrer;
@@ -20,7 +22,9 @@ public class Author implements Serializable {
 	private String email;
 	private LocalDate birthDate;
 	private Genrer genrer;
-	private List<Book> books;
+	
+	@DBRef
+	private List<Book> books = new ArrayList<>();
 	
 	public Author() {
 		
@@ -77,6 +81,10 @@ public class Author implements Serializable {
 
 	public List<Book> getBooks() {
 		return books;
+	}
+	
+	public void addBook(Book book) {
+		this.books.add(book);
 	}
 
 	@Override
