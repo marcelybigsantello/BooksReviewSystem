@@ -103,9 +103,6 @@ public class Book implements Serializable {
 		return author;
 	}
 
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
 
 	@Override
 	public int hashCode() {

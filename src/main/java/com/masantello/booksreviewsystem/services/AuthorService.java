@@ -38,6 +38,15 @@ public class AuthorService {
 
 		return author.get();
 	}
+	
+	public Optional<Author> findByNameAndEmail(String name, String email) {
+		var author = authorRepository.findByNameAndEmail(name, email);
+		if (author.isEmpty()) {
+			throw new ObjectNotFoundException("Autor não encontrado");
+		}
+		
+		return author;
+	}
 
 	public Author update(Author author) {
 		Author newDataAuthor = findById(author.getId());
@@ -47,6 +56,13 @@ public class AuthorService {
 		newDataAuthor.setGenrer(author.getGenrer());
 		authorRepository.save(newDataAuthor);
 		return newDataAuthor;
+	}
+	
+	public void addNewBookOfAuthor(Author author) {
+		Author newDataAuthor = findById(author.getId());
+		int position = author.getBooks().size() - 1;
+		newDataAuthor.addBook(author.getBooks().get(position));
+		authorRepository.save(newDataAuthor);	
 	}
 	
 	public void delete(String id) {
@@ -63,5 +79,7 @@ public class AuthorService {
 		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
 				authorDto.getBirthDate(), authorDto.getGenrer());
 	}
+
+	
 
 }
