@@ -3,6 +3,7 @@ package com.masantello.booksreviewsystem.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
@@ -16,7 +17,7 @@ public class AuthorDTO implements Serializable {
 	private String email;
 	private LocalDate birthDate;
 	private Genrer genrer;
-	private List<Book> books;
+	private List<String> books;
 	
 	public AuthorDTO() {
 		
@@ -29,7 +30,7 @@ public class AuthorDTO implements Serializable {
 		this.email = author.getEmail();
 		this.birthDate = author.getBirthDate();
 		this.genrer = author.getGenrer();
-		this.books = author.getBooks();
+		this.books = mapFromTitle(author.getBooks());
 	}
 
 	public String getId() {
@@ -72,12 +73,12 @@ public class AuthorDTO implements Serializable {
 		this.genrer = genrer;
 	}
 
-	public List<Book> getBooks() {
+	public List<String> getBooks() {
 		return books;
 	}
-
-	public void setBooks(List<Book> books) {
-		this.books = books;
+	
+	private List<String> mapFromTitle(List<Book> books) {
+		return books.stream().map(book -> book.getTitle()).collect(Collectors.toList());
 	}
-		
+
 }

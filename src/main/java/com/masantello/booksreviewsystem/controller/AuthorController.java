@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.masantello.booksreviewsystem.domain.Author;
+import com.masantello.booksreviewsystem.domain.Book;
 import com.masantello.booksreviewsystem.dto.AuthorDTO;
 import com.masantello.booksreviewsystem.services.AuthorService;
 
@@ -64,5 +65,12 @@ public class AuthorController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/{id}/books", method = RequestMethod.GET)
+	public ResponseEntity<List<Book>> findBooks(@PathVariable String id) {
+		Author author = service.findById(id);
+		return ResponseEntity.ok().body(author.getBooks());
+	}
+
 
 }
