@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.masantello.booksreviewsystem.dto.AuthorSimplifiedDTO;
+
 @Document(collection = "book")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,10 +22,10 @@ public class Book implements Serializable {
 	private LocalDate releaseDate;
 	private Float price;
 	private int quantityInSupply;
-	private Author author;
+	private AuthorSimplifiedDTO authorDto;
 	
 	public Book(String id, String title, String description, String editor, short numberOfPages, LocalDate releaseDate,
-			Float price, int quantityInSupply, Author author) {
+			Float price, int quantityInSupply, AuthorSimplifiedDTO authorDto) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -32,7 +34,7 @@ public class Book implements Serializable {
 		this.releaseDate = releaseDate;
 		this.price = price;
 		this.quantityInSupply = quantityInSupply;
-		this.author = author;
+		this.authorDto = authorDto;
 	}
 
 	public String getId() {
@@ -99,10 +101,13 @@ public class Book implements Serializable {
 		this.quantityInSupply = quantityInSupply;
 	}
 
-	public Author getAuthor() {
-		return author;
+	public AuthorSimplifiedDTO getAuthorDto() {
+		return authorDto;
 	}
-
+		
+	public void setAuthorDto(AuthorSimplifiedDTO authorDto) {
+		this.authorDto = authorDto;
+	}
 
 	@Override
 	public int hashCode() {
@@ -120,5 +125,5 @@ public class Book implements Serializable {
 		Book other = (Book) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

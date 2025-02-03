@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 
-import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
 
 public class BookDTO implements Serializable {
@@ -20,7 +19,7 @@ public class BookDTO implements Serializable {
 	private LocalDate releaseDate;
 	private Float price;
 	private int quantityInSupply;
-	private Author author;
+	private AuthorSimplifiedDTO authorDto;
 
 	public BookDTO() {
 		
@@ -35,7 +34,7 @@ public class BookDTO implements Serializable {
 		this.releaseDate = book.getReleaseDate();
 		this.price = book.getPrice();
 		this.quantityInSupply = book.getQuantityInSupply();
-		this.author = book.getAuthor();
+		this.authorDto = book.getAuthorDto();
 	}
 
 	public String getId() {
@@ -102,13 +101,9 @@ public class BookDTO implements Serializable {
 		this.quantityInSupply = quantityInSupply;
 	}
 
-	public Author getAuthor() {
-		return author;
+	public AuthorSimplifiedDTO getAuthorDto() {
+		return authorDto;
 	}
 
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
-	
 }
 
