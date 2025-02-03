@@ -27,13 +27,13 @@ public class BookService {
 
 	public Book insert(Book book) {
 		var result = bookRepository.insert(book);
-		
-		Optional<Author> author = authorService.findByNameAndEmail(book.getAuthor().getName(),
-				book.getAuthor().getEmail());
+
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
+				book.getAuthorDto().getGenrer());
 		if (author.isEmpty()) {
 			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
 		}
-		
+
 		author.get().addBook(book);
 		authorService.addNewBookOfAuthor(author.get());
 
@@ -41,7 +41,7 @@ public class BookService {
 	}
 
 	public List<Book> findAll() {
-		return bookRepository.findAll();
+		return bookRepository.findAll();		
 	}
 
 	public Book findById(String id) {
@@ -53,22 +53,22 @@ public class BookService {
 		return book.get();
 	}
 
-	public Book update(Book book) {
-		Book newDataBook = findById(book.getId());
-		newDataBook.setTitle(book.getTitle());
-		newDataBook.setDescription(book.getDescription());
-		newDataBook.setEditor(book.getEditor());
-		newDataBook.setNumberOfPages(book.getNumberOfPages());
-		newDataBook.setReleaseDate(book.getReleaseDate());
-		newDataBook.setPrice(book.getPrice());
-		newDataBook.setQuantityInSupply(book.getQuantityInSupply());
+	public Book update(Book newDataBook) {
+		Book book = findById(newDataBook.getId());
+		book.setTitle(newDataBook.getTitle());
+		book.setDescription(newDataBook.getDescription());
+		book.setEditor(newDataBook.getEditor());
+		book.setNumberOfPages(newDataBook.getNumberOfPages());
+		book.setReleaseDate(newDataBook.getReleaseDate());
+		book.setPrice(newDataBook.getPrice());
+		book.setQuantityInSupply(newDataBook.getQuantityInSupply());
 		bookRepository.save(newDataBook);
-		
-		//Atualizando lista de livros do autor
-		Optional<Author> author = authorService.findByNameAndEmail(book.getAuthor().getName(), 
-				book.getAuthor().getEmail());
-		author.get().addBook(newDataBook);
-		authorService.addNewBookOfAuthor(author.get());
+
+		// Atualizando lista de livros do autor
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
+				book.getAuthorDto().getGenrer());
+		author.get().addBook(book);
+		authorService.update(author.get());
 		return newDataBook;
 	}
 
@@ -83,9 +83,9 @@ public class BookService {
 
 	public Book fromDto(BookDTO bookDto) {
 		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), 
-				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(), 
+				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(),
 				bookDto.getPrice(), bookDto.getQuantityInSupply(),
-				bookDto.getAuthor());
+				bookDto.getAuthorDto());
 	}
 
 }

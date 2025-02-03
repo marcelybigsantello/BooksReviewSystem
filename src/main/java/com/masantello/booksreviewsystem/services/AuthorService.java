@@ -39,8 +39,8 @@ public class AuthorService {
 		return author.get();
 	}
 	
-	public Optional<Author> findByNameAndEmail(String name, String email) {
-		var author = authorRepository.findByNameAndEmail(name, email);
+	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
+		var author = authorRepository.findByNameAndGenrer(name, genrer);
 		if (author.isEmpty()) {
 			throw new ObjectNotFoundException("Autor não encontrado");
 		}
