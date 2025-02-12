@@ -42,7 +42,7 @@ public class BookService {
 	}
 
 	public List<Book> findAll() {
-		return bookRepository.findAll();
+		return bookRepository.findAll();		
 	}
 
 	public Book findById(String id) {
@@ -96,8 +96,9 @@ public class BookService {
 
 	public Book fromDto(BookDTO bookDto) {
 
-		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
-				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
+		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), 
+				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(),
+				bookDto.getPrice(), bookDto.getQuantityInSupply(),
 				bookDto.getAuthorDto());
 	}
 

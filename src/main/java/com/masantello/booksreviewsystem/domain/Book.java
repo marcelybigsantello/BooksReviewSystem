@@ -26,7 +26,7 @@ public class Book implements Serializable {
 	private Float price;
 	private int quantityInSupply;
 	private AuthorSimplifiedDTO authorDto;
-	
+
 	@DBRef
 	private List<BookReview> reviews = new ArrayList<>();
 	
@@ -114,7 +114,6 @@ public class Book implements Serializable {
 	public void setAuthorDto(AuthorSimplifiedDTO authorDto) {
 		this.authorDto = authorDto;
 	}
-
 	
 	public List<BookReview> getReviews() {
 		return reviews;
@@ -123,7 +122,6 @@ public class Book implements Serializable {
 	public void addReview(BookReview reviewDto) {
 		reviews.add(reviewDto);
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -141,5 +139,5 @@ public class Book implements Serializable {
 		Book other = (Book) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }
