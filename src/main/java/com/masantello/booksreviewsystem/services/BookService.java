@@ -2,7 +2,6 @@ package com.masantello.booksreviewsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
 import com.masantello.booksreviewsystem.dto.BookDTO;
 import com.masantello.booksreviewsystem.repositories.BookRepository;
+import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
 
@@ -18,6 +18,7 @@ public class BookService {
 
 	private final BookRepository bookRepository;
 	private final AuthorService authorService;
+	private static final String NOT_FOUND_ERROR = "Livro não encontrado";
 
 	@Autowired
 	public BookService(BookRepository bookRepository, AuthorService authorService) {
@@ -27,13 +28,13 @@ public class BookService {
 
 	public Book insert(Book book) {
 		var result = bookRepository.insert(book);
-		
-		Optional<Author> author = authorService.findByNameAndEmail(book.getAuthor().getName(),
-				book.getAuthor().getEmail());
+
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
+				book.getAuthorDto().getGenrer());
 		if (author.isEmpty()) {
 			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
 		}
-		
+
 		author.get().addBook(book);
 		authorService.addNewBookOfAuthor(author.get());
 
@@ -47,28 +48,40 @@ public class BookService {
 	public Book findById(String id) {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isEmpty()) {
-			throw new ObjectNotFoundException("Livro não encontrado");
+			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
 		}
 
 		return book.get();
 	}
 
-	public Book update(Book book) {
-		Book newDataBook = findById(book.getId());
-		newDataBook.setTitle(book.getTitle());
-		newDataBook.setDescription(book.getDescription());
-		newDataBook.setEditor(book.getEditor());
-		newDataBook.setNumberOfPages(book.getNumberOfPages());
-		newDataBook.setReleaseDate(book.getReleaseDate());
-		newDataBook.setPrice(book.getPrice());
-		newDataBook.setQuantityInSupply(book.getQuantityInSupply());
+	public Book findByTitle(String title) {
+		if (title == null) {
+			throw new BadRequestException("Título nulo.");
+		}
+		Optional<Book> book = bookRepository.findByTitle(title);
+		if (book.isEmpty()) {
+			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
+		}
+
+		return book.get();
+	}
+
+	public Book update(Book newDataBook) {
+		Book book = findById(newDataBook.getId());
+		book.setTitle(newDataBook.getTitle());
+		book.setDescription(newDataBook.getDescription());
+		book.setEditor(newDataBook.getEditor());
+		book.setNumberOfPages(newDataBook.getNumberOfPages());
+		book.setReleaseDate(newDataBook.getReleaseDate());
+		book.setPrice(newDataBook.getPrice());
+		book.setQuantityInSupply(newDataBook.getQuantityInSupply());
 		bookRepository.save(newDataBook);
-		
-		//Atualizando lista de livros do autor
-		Optional<Author> author = authorService.findByNameAndEmail(book.getAuthor().getName(), 
-				book.getAuthor().getEmail());
-		author.get().addBook(newDataBook);
-		authorService.addNewBookOfAuthor(author.get());
+
+		// Atualizando lista de livros do autor
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
+				book.getAuthorDto().getGenrer());
+		author.get().addBook(book);
+		authorService.update(author.get());
 		return newDataBook;
 	}
 
@@ -82,10 +95,14 @@ public class BookService {
 	}
 
 	public Book fromDto(BookDTO bookDto) {
-		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), 
-				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(), 
-				bookDto.getPrice(), bookDto.getQuantityInSupply(),
-				bookDto.getAuthor());
+
+		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
+				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
+				bookDto.getAuthorDto());
+	}
+
+	public void addNewReviewOfBook(Book book) {
+		bookRepository.save(book);
 	}
 
 }

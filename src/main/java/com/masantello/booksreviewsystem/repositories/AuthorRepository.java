@@ -12,7 +12,7 @@ import com.masantello.booksreviewsystem.domain.Author;
 @Repository
 public interface AuthorRepository extends MongoRepository<Author, String> {
 	
-	@Query("{ 'name': { $regex: ?0, $options: 'i' } }, { 'email': { $regex: ?0, $options: 'i' } }")
-	public Optional<Author> findByNameAndEmail(@Param("name") String name, @Param("email") String email);
+	@Query("{ 'name': { $regex: ?0, $options: 'i' } }, { 'genrer': { $regex: ?0, $options: 'i' } }")
+	public Optional<Author> findByNameAndGenrer(@Param("name") String name, @Param("genrer") String genrer);
 
 }

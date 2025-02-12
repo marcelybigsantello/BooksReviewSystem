@@ -2,16 +2,15 @@ package com.masantello.booksreviewsystem.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
-import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
+import com.masantello.booksreviewsystem.domain.BookReview;
 
 public class BookDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
 	private String id;
 	private String title;
 	private String description;
@@ -20,7 +19,8 @@ public class BookDTO implements Serializable {
 	private LocalDate releaseDate;
 	private Float price;
 	private int quantityInSupply;
-	private Author author;
+	private AuthorSimplifiedDTO authorDto;
+	private List<BookReview> reviews = new ArrayList<>();
 
 	public BookDTO() {
 		
@@ -35,7 +35,8 @@ public class BookDTO implements Serializable {
 		this.releaseDate = book.getReleaseDate();
 		this.price = book.getPrice();
 		this.quantityInSupply = book.getQuantityInSupply();
-		this.author = book.getAuthor();
+		this.authorDto = book.getAuthorDto();
+		this.reviews = book.getReviews();
 	}
 
 	public String getId() {
@@ -101,14 +102,13 @@ public class BookDTO implements Serializable {
 	public void setQuantityInSupply(int quantityInSupply) {
 		this.quantityInSupply = quantityInSupply;
 	}
-
-	public Author getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
 	
-}
+	public AuthorSimplifiedDTO getAuthorDto() {
+		return authorDto;
+	}
 
+	public List<BookReview> getReviews() {
+		return reviews;
+	}	
+
+}

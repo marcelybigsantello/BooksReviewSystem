@@ -15,6 +15,7 @@ import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundExcepti
 @Service
 public class AuthorService {
 
+	private static final String NOT_FOUND_ERROR = "Autor não encontrado";
 	private final AuthorRepository authorRepository;
 
 	@Autowired
@@ -33,16 +34,16 @@ public class AuthorService {
 	public Author findById(String id) {
 		Optional<Author> author = authorRepository.findById(id);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException("Autor não encontrado");
+			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
 		}
 
 		return author.get();
 	}
 	
-	public Optional<Author> findByNameAndEmail(String name, String email) {
-		var author = authorRepository.findByNameAndEmail(name, email);
+	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
+		var author = authorRepository.findByNameAndGenrer(name, genrer);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException("Autor não encontrado");
+			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
 		}
 		
 		return author;
@@ -55,14 +56,12 @@ public class AuthorService {
 		newDataAuthor.setBirthDate(author.getBirthDate());
 		newDataAuthor.setGenrer(author.getGenrer());
 		authorRepository.save(newDataAuthor);
+		
 		return newDataAuthor;
 	}
 	
 	public void addNewBookOfAuthor(Author author) {
-		Author newDataAuthor = findById(author.getId());
-		int position = author.getBooks().size() - 1;
-		newDataAuthor.addBook(author.getBooks().get(position));
-		authorRepository.save(newDataAuthor);	
+		authorRepository.save(author);	
 	}
 	
 	public void delete(String id) {
@@ -79,7 +78,5 @@ public class AuthorService {
 		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
 				authorDto.getBirthDate(), authorDto.getGenrer());
 	}
-
-	
 
 }

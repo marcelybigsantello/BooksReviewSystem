@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
 
@@ -29,6 +30,15 @@ public class ControllerExceptionHandler {
 				e.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(error);
+	}
+	
+	@ExceptionHandler
+	public static ResponseEntity<StandardError> getBadRequest(BadRequestException e, 
+			HttpServletRequest request) {
+		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Estrutura incorreta de requisição",
+				e.getMessage(), request.getRequestURI());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
 }
