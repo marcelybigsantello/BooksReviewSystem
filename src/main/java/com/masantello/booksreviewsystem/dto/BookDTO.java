@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.masantello.booksreviewsystem.domain.Book;
-import com.masantello.booksreviewsystem.domain.BookReview;
 
 public class BookDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +19,7 @@ public class BookDTO implements Serializable {
 	private Float price;
 	private int quantityInSupply;
 	private AuthorSimplifiedDTO authorDto;
-	private List<BookReview> reviews = new ArrayList<>();
+	private List<BookReviewSimplifiedDTO> reviews = new ArrayList<>();
 
 	public BookDTO() {
 		
@@ -107,7 +106,7 @@ public class BookDTO implements Serializable {
 		return authorDto;
 	}
 
-	public List<BookReview> getReviews() {
+	public List<BookReviewSimplifiedDTO> getReviews() {
 		return reviews;
 	}	
 
