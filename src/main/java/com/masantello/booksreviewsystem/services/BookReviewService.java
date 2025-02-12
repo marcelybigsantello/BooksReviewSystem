@@ -47,11 +47,11 @@ public class BookReviewService {
 
 	
 	public BookReview update(BookReview newReview) {
-		if (newReview.getNumberOfStars() == 0 && newReview.getText() == null) {
+		if (newReview.getRating() == null && newReview.getText() == null) {
 			throw new BadRequestException("Número de estrelas e feedback nulos.");
 		}
 		BookReview review = findById(newReview.getId());
-		review.setNumberOfStars(newReview.getNumberOfStars());
+		review.setRating(newReview.getRating());
 		review.setText(newReview.getText());
 		review.setDate(LocalDateTime.now());
 		reviewsRepository.save(review);
@@ -69,7 +69,7 @@ public class BookReviewService {
 	}
 	
 	public BookReview fromDto(BookReviewDTO reviewDto) {
-		return new BookReview(reviewDto.getNumberOfStars(), 
+		return new BookReview(reviewDto.getRating(), 
 				reviewDto.getText(), reviewDto.getDate(), reviewDto.getBook());
 	}
 	

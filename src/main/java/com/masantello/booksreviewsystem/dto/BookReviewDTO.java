@@ -9,7 +9,7 @@ public class BookReviewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private short numberOfStars;
+	private Float rating;
 	private String text;
 	private LocalDateTime date;
 	private BookSimplifiedDTO book;
@@ -20,14 +20,14 @@ public class BookReviewDTO implements Serializable {
 	
 	public BookReviewDTO(BookReview review) {
 		this.id = review.getId();
-		this.numberOfStars = review.getNumberOfStars();
+		this.rating = review.getRating();
 		this.text = review.getText();
 		this.date = review.getDate();
 		this.book = review.getBook();
 	}
 
-	public BookReviewDTO(short numberOfStars, String text, LocalDateTime date, BookSimplifiedDTO book) {
-		this.numberOfStars = numberOfStars;
+	public BookReviewDTO(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+		this.rating = rating;
 		this.text = text;
 		this.date = date;
 		this.book = book;
@@ -41,12 +41,12 @@ public class BookReviewDTO implements Serializable {
 		this.id = id;
 	}
 
-	public short getNumberOfStars() {
-		return numberOfStars;
+	public Float getRating() {
+		return rating;
 	}
 
-	public void setNumberOfStars(short numberOfStars) {
-		this.numberOfStars = numberOfStars;
+	public void setRating(Float rating) {
+		this.rating = rating;
 	}
 
 	public String getText() {

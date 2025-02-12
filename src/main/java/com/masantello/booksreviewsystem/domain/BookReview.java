@@ -15,7 +15,7 @@ public class BookReview implements Serializable {
 	
 	@Id
 	private String id;
-	private short numberOfStars;
+	private Float rating;
 	private String text;
 	private LocalDateTime date;
 	
@@ -24,18 +24,17 @@ public class BookReview implements Serializable {
 	public BookReview() {
 		
 	}
-
-	public BookReview(short numberOfStars, String text, LocalDateTime date, BookSimplifiedDTO book) {
-		this.numberOfStars = numberOfStars;
+	
+	public BookReview(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+		this.rating = rating;
 		this.text = text;
 		this.date = date;
 		this.book = book;
 	}
-
-	public BookReview(String id, short numberOfStars, String text, LocalDateTime date, 
-			BookSimplifiedDTO book) {
+	
+	public BookReview(String id, Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
 		this.id = id;
-		this.numberOfStars = numberOfStars;
+		this.rating = rating;
 		this.text = text;
 		this.date = date;
 		this.book = book;
@@ -49,12 +48,12 @@ public class BookReview implements Serializable {
 		this.id = id;
 	}
 
-	public short getNumberOfStars() {
-		return numberOfStars;
+	public Float getRating() {
+		return rating;
 	}
 
-	public void setNumberOfStars(short numberOfStars) {
-		this.numberOfStars = numberOfStars;
+	public void setRating(Float rating) {
+		this.rating = rating;
 	}
 
 	public String getText() {
@@ -75,10 +74,6 @@ public class BookReview implements Serializable {
 
 	public BookSimplifiedDTO getBook() {
 		return book;
-	}
-
-	public void setBook(BookSimplifiedDTO book) {
-		this.book = book;
 	}
 
 	@Override
