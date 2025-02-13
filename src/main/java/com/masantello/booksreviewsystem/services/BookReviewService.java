@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.masantello.booksreviewsystem.domain.Book;
 import com.masantello.booksreviewsystem.domain.BookReview;
 import com.masantello.booksreviewsystem.dto.BookReviewDTO;
-import com.masantello.booksreviewsystem.dto.BookReviewSimplifiedDTO;
 import com.masantello.booksreviewsystem.repositories.BookReviewRepository;
 import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
@@ -41,8 +40,9 @@ public class BookReviewService {
 		review.setDate(LocalDateTime.now());
 		 
 		var result = reviewsRepository.insert(review);
-		book.addReview(toDto(review));
+		book.addReview(review);
 		bookService.addNewReviewOfBook(book);
+		
 		return result;
 	}
 
@@ -73,9 +73,5 @@ public class BookReviewService {
 		return new BookReview(reviewDto.getRating(), 
 				reviewDto.getText(), reviewDto.getDate(), reviewDto.getBook());
 	}
-	
-	public BookReviewSimplifiedDTO toDto(BookReview review) {
-		return new BookReviewSimplifiedDTO(review.getId(), review.getRating(), review.getText());
-	}
-	
+
 }

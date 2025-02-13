@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.masantello.booksreviewsystem.dto.AuthorSimplifiedDTO;
-import com.masantello.booksreviewsystem.dto.BookReviewSimplifiedDTO;
 
 @Document(collection = "book")
 public class Book implements Serializable {
@@ -29,7 +28,7 @@ public class Book implements Serializable {
 	private AuthorSimplifiedDTO authorDto;
 
 	@DBRef
-	private List<BookReviewSimplifiedDTO> reviews = new ArrayList<>();
+	private List<BookReview> reviews = new ArrayList<>();
 	
 	public Book(String id, String title, String description, String editor, short numberOfPages, LocalDate releaseDate,
 			Float price, int quantityInSupply, AuthorSimplifiedDTO authorDto) {
@@ -116,14 +115,14 @@ public class Book implements Serializable {
 		this.authorDto = authorDto;
 	}
 	
-	public List<BookReviewSimplifiedDTO> getReviews() {
+	public List<BookReview> getReviews() {
 		return reviews;
 	}
 	
-	public void addReview(BookReviewSimplifiedDTO reviewDto) {
-		reviews.add(reviewDto);
+	public void addReview(BookReview review) {
+		this.reviews.add(review);
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
