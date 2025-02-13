@@ -28,7 +28,7 @@ public class Book implements Serializable {
 	private AuthorSimplifiedDTO authorDto;
 
 	@DBRef
-	private List<BookReview> reviews = new ArrayList<>();
+	private List<Review> reviews = new ArrayList<>();
 	
 	public Book(String id, String title, String description, String editor, short numberOfPages, LocalDate releaseDate,
 			Float price, int quantityInSupply, AuthorSimplifiedDTO authorDto) {
@@ -115,11 +115,11 @@ public class Book implements Serializable {
 		this.authorDto = authorDto;
 	}
 	
-	public List<BookReview> getReviews() {
+	public List<Review> getReviews() {
 		return reviews;
 	}
 	
-	public void addReview(BookReview review) {
+	public void addReview(Review review) {
 		this.reviews.add(review);
 	}
 	
