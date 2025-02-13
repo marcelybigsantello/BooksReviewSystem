@@ -1,15 +1,15 @@
 package com.masantello.booksreviewsystem.dto;
 
-public class BookReviewSimplifiedDTO {
+public class ReviewSimplifiedDTO {
 
 	private Float rating;
 	private String text;
 	
-	public BookReviewSimplifiedDTO() {
+	public ReviewSimplifiedDTO() {
 		
 	}	
 
-	public BookReviewSimplifiedDTO(Float rating, String text) {
+	public ReviewSimplifiedDTO(Float rating, String text) {
 		this.rating = rating;
 		this.text = text;
 	}

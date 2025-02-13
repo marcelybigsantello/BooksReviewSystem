@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.masantello.booksreviewsystem.domain.Book;
-import com.masantello.booksreviewsystem.domain.BookReview;
+import com.masantello.booksreviewsystem.domain.Review;
 
 public class BookDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class BookDTO implements Serializable {
 	private Float price;
 	private int quantityInSupply;
 	private AuthorSimplifiedDTO authorDto;
-	private List<BookReviewSimplifiedDTO> reviews = new ArrayList<>();
+	private List<ReviewSimplifiedDTO> reviews = new ArrayList<>();
 
 	public BookDTO() {
 
@@ -107,13 +107,13 @@ public class BookDTO implements Serializable {
 		return authorDto;
 	}
 
-	public List<BookReviewSimplifiedDTO> getReviews() {
+	public List<ReviewSimplifiedDTO> getReviews() {
 		return reviews;
 	}
 
-	private List<BookReviewSimplifiedDTO> mapToReviewDTO(List<BookReview> reviews) {
+	private List<ReviewSimplifiedDTO> mapToReviewDTO(List<Review> reviews) {
 		return reviews.stream().map(review -> 
-			new BookReviewSimplifiedDTO(review.getRating(), review.getText())).toList();
+			new ReviewSimplifiedDTO(review.getRating(), review.getText())).toList();
 	}
 
 }

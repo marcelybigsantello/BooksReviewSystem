@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.masantello.booksreviewsystem.dto.BookSimplifiedDTO;
 
 @Document(collection = "reviews")
-public class BookReview implements Serializable {
+public class Review implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,18 +21,18 @@ public class BookReview implements Serializable {
 	
 	private BookSimplifiedDTO book;
 	
-	public BookReview() {
+	public Review() {
 		
 	}
 	
-	public BookReview(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+	public Review(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
 		this.rating = rating;
 		this.text = text;
 		this.date = date;
 		this.book = book;
 	}
 	
-	public BookReview(String id, Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+	public Review(String id, Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
 		this.id = id;
 		this.rating = rating;
 		this.text = text;
@@ -89,7 +89,7 @@ public class BookReview implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BookReview other = (BookReview) obj;
+		Review other = (Review) obj;
 		return Objects.equals(id, other.id);
 	}
 }

@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.masantello.booksreviewsystem.domain.BookReview;
-import com.masantello.booksreviewsystem.dto.BookReviewDTO;
-import com.masantello.booksreviewsystem.services.BookReviewService;
+import com.masantello.booksreviewsystem.domain.Review;
+import com.masantello.booksreviewsystem.dto.ReviewDTO;
+import com.masantello.booksreviewsystem.services.ReviewService;
 
 @RestController
 @RequestMapping(value = "/reviews")
 public class ReviewController {
 
-	private final BookReviewService service;
+	private final ReviewService service;
 	
 	@Autowired
-	public ReviewController(BookReviewService service) {
+	public ReviewController(ReviewService service) {
 		this.service = service;
 	}
 	
 	//INSERT
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<BookReviewDTO> insert(@RequestBody BookReviewDTO reviewDto) {
-		BookReview bookReview = service.fromDto(reviewDto);
+	public ResponseEntity<ReviewDTO> insert(@RequestBody ReviewDTO reviewDto) {
+		Review bookReview = service.fromDto(reviewDto);
 		bookReview = service.insert(bookReview);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -41,9 +41,9 @@ public class ReviewController {
 	
 	//FINDALL
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<BookReviewDTO>> findAll() {
-		List<BookReview> bookReviews = service.findAll();
-		List<BookReviewDTO> bookReviewsDto = bookReviews.stream().map(review -> new BookReviewDTO(review))
+	public ResponseEntity<List<ReviewDTO>> findAll() {
+		List<Review> bookReviews = service.findAll();
+		List<ReviewDTO> bookReviewsDto = bookReviews.stream().map(review -> new ReviewDTO(review))
 				.collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(bookReviewsDto);
@@ -51,12 +51,12 @@ public class ReviewController {
 	
 	//UPDATE
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<BookReviewDTO> update(@RequestBody BookReviewDTO reviewDto, @PathVariable String id) {
-		BookReview bookReview = service.fromDto(reviewDto);
+	public ResponseEntity<ReviewDTO> update(@RequestBody ReviewDTO reviewDto, @PathVariable String id) {
+		Review bookReview = service.fromDto(reviewDto);
 		bookReview.setId(id);
 		bookReview = service.update(bookReview);
 		
-		return ResponseEntity.ok().body(new BookReviewDTO(bookReview));
+		return ResponseEntity.ok().body(new ReviewDTO(bookReview));
 	}
 	
 }

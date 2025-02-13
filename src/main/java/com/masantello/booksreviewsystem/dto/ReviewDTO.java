@@ -3,9 +3,9 @@ package com.masantello.booksreviewsystem.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.masantello.booksreviewsystem.domain.BookReview;
+import com.masantello.booksreviewsystem.domain.Review;
 
-public class BookReviewDTO implements Serializable {
+public class ReviewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
@@ -14,11 +14,11 @@ public class BookReviewDTO implements Serializable {
 	private LocalDateTime date;
 	private BookSimplifiedDTO book;
 	
-	public BookReviewDTO() {
+	public ReviewDTO() {
 		
 	}
 	
-	public BookReviewDTO(BookReview review) {
+	public ReviewDTO(Review review) {
 		this.id = review.getId();
 		this.rating = review.getRating();
 		this.text = review.getText();
@@ -26,7 +26,7 @@ public class BookReviewDTO implements Serializable {
 		this.book = review.getBook();
 	}
 
-	public BookReviewDTO(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+	public ReviewDTO(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
 		this.rating = rating;
 		this.text = text;
 		this.date = date;
