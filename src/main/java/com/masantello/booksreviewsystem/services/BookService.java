@@ -2,6 +2,7 @@ package com.masantello.booksreviewsystem.services;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,13 @@ import com.masantello.booksreviewsystem.repositories.BookRepository;
 import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
+import com.masantello.booksreviewsystem.utils.Constants;
 
 @Service
 public class BookService {
 
 	private final BookRepository bookRepository;
 	private final AuthorService authorService;
-	private static final String NOT_FOUND_ERROR = "Livro não encontrado";
 
 	@Autowired
 	public BookService(BookRepository bookRepository, AuthorService authorService) {
@@ -32,7 +33,7 @@ public class BookService {
 		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
 				book.getAuthor().getGenrer());
 		if (author.isEmpty()) {
-			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
+			throw new DataIntegrityViolationsException(Constants.BOOK_AUTHOR_NOT_REGISTERED);
 		}
 
 		author.get().addBook(book);
@@ -48,7 +49,7 @@ public class BookService {
 	public Book findById(String id) {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isEmpty()) {
-			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.BOOK_NOT_FOUND_ERROR);
 		}
 
 		return book.get();
@@ -60,7 +61,7 @@ public class BookService {
 		}
 		Optional<Book> book = bookRepository.findByTitle(title);
 		if (book.isEmpty()) {
-			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.BOOK_NOT_FOUND_ERROR);
 		}
 
 		return book.get();
@@ -80,15 +81,14 @@ public class BookService {
 		// Atualizando lista de livros do autor
 		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(), book.getAuthor().getGenrer());
 		author.get().addBook(book);
-		authorService.update(author.get());
+		authorService.addNewBookOfAuthor(author.get());
 		return newDataBook;
 	}
 
 	public void delete(String id) {
 		Book book = findById(id);
 		if (book.getQuantityInSupply() > 0) {
-			throw new DataIntegrityViolationsException(
-					"Não é possível excluir o livro, " + "pois possui exemplares em estoque.");
+			throw new DataIntegrityViolationsException(Constants.NOT_POSSIBLE_TO_DELETE_BOOK);
 		}
 		bookRepository.delete(book);
 	}
@@ -101,7 +101,7 @@ public class BookService {
 				bookDto.getAuthor());
 	}
 
-	public void addNewReviewOfBook(Book book) {
+	public void addOrUpdateReviewOfBook(Book book) {
 		bookRepository.save(book);
 	}
 

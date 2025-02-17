@@ -11,11 +11,11 @@ import com.masantello.booksreviewsystem.dto.AuthorDTO;
 import com.masantello.booksreviewsystem.repositories.AuthorRepository;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
+import com.masantello.booksreviewsystem.utils.Constants;
 
 @Service
 public class AuthorService {
 
-	private static final String NOT_FOUND_ERROR = "Autor não encontrado";
 	private final AuthorRepository authorRepository;
 
 	@Autowired
@@ -34,7 +34,7 @@ public class AuthorService {
 	public Author findById(String id) {
 		Optional<Author> author = authorRepository.findById(id);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.NOT_FOUND_ERROR);
 		}
 
 		return author.get();
@@ -43,7 +43,7 @@ public class AuthorService {
 	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
 		var author = authorRepository.findByNameAndGenrer(name, genrer);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException(NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.NOT_FOUND_ERROR);
 		}
 		
 		return author;
@@ -67,8 +67,7 @@ public class AuthorService {
 	public void delete(String id) {
 		Author author = findById(id);
 		if (author.getBooks() != null && author.getBooks().size() > 0) {
-			throw new DataIntegrityViolationsException("O autor possui livros cadastrados. "
-					+ "Não é possível excluí-lo");
+			throw new DataIntegrityViolationsException(Constants.AUTHOR_DOES_NOT_HAVE_BOOKS);
 		}
 
 		authorRepository.delete(author);
