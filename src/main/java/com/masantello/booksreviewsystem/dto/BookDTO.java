@@ -19,7 +19,7 @@ public class BookDTO implements Serializable {
 	private LocalDate releaseDate;
 	private Float price;
 	private int quantityInSupply;
-	private AuthorSimplifiedDTO authorDto;
+	private AuthorSimplifiedDTO author;
 	private List<ReviewSimplifiedDTO> reviews = new ArrayList<>();
 
 	public BookDTO() {
@@ -35,7 +35,7 @@ public class BookDTO implements Serializable {
 		this.releaseDate = book.getReleaseDate();
 		this.price = book.getPrice();
 		this.quantityInSupply = book.getQuantityInSupply();
-		this.authorDto = book.getAuthorDto();
+		this.author = book.getAuthor();
 		this.reviews = mapToReviewDTO(book.getReviews());
 	}
 
@@ -103,8 +103,8 @@ public class BookDTO implements Serializable {
 		this.quantityInSupply = quantityInSupply;
 	}
 
-	public AuthorSimplifiedDTO getAuthorDto() {
-		return authorDto;
+	public AuthorSimplifiedDTO getAuthor() {
+		return author;
 	}
 
 	public List<ReviewSimplifiedDTO> getReviews() {

@@ -29,8 +29,8 @@ public class BookService {
 	public Book insert(Book book) {
 		var result = bookRepository.insert(book);
 
-		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
-				book.getAuthorDto().getGenrer());
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
+				book.getAuthor().getGenrer());
 		if (author.isEmpty()) {
 			throw new DataIntegrityViolationsException("Não foi possível inserir o livro. Favor cadastrar o autor.");
 		}
@@ -78,8 +78,7 @@ public class BookService {
 		bookRepository.save(newDataBook);
 
 		// Atualizando lista de livros do autor
-		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthorDto().getName(),
-				book.getAuthorDto().getGenrer());
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(), book.getAuthor().getGenrer());
 		author.get().addBook(book);
 		authorService.update(author.get());
 		return newDataBook;
@@ -99,7 +98,7 @@ public class BookService {
 		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), 
 				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(),
 				bookDto.getPrice(), bookDto.getQuantityInSupply(),
-				bookDto.getAuthorDto());
+				bookDto.getAuthor());
 	}
 
 	public void addNewReviewOfBook(Book book) {

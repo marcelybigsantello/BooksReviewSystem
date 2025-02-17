@@ -25,13 +25,13 @@ public class Book implements Serializable {
 	private LocalDate releaseDate;
 	private Float price;
 	private int quantityInSupply;
-	private AuthorSimplifiedDTO authorDto;
+	private AuthorSimplifiedDTO author;
 
 	@DBRef
 	private List<Review> reviews = new ArrayList<>();
 	
 	public Book(String id, String title, String description, String editor, short numberOfPages, LocalDate releaseDate,
-			Float price, int quantityInSupply, AuthorSimplifiedDTO authorDto) {
+			Float price, int quantityInSupply, AuthorSimplifiedDTO author) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -40,7 +40,7 @@ public class Book implements Serializable {
 		this.releaseDate = releaseDate;
 		this.price = price;
 		this.quantityInSupply = quantityInSupply;
-		this.authorDto = authorDto;
+		this.author = author;
 	}
 
 	public String getId() {
@@ -107,12 +107,12 @@ public class Book implements Serializable {
 		this.quantityInSupply = quantityInSupply;
 	}
 
-	public AuthorSimplifiedDTO getAuthorDto() {
-		return authorDto;
+	public AuthorSimplifiedDTO getAuthor() {
+		return author;
 	}
 		
-	public void setAuthorDto(AuthorSimplifiedDTO authorDto) {
-		this.authorDto = authorDto;
+	public void setAuthor(AuthorSimplifiedDTO author) {
+		this.author = author;
 	}
 	
 	public List<Review> getReviews() {
