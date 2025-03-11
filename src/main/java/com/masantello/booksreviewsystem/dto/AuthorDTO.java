@@ -3,7 +3,6 @@ package com.masantello.booksreviewsystem.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.domain.Book;
@@ -78,7 +77,7 @@ public class AuthorDTO implements Serializable {
 	}
 	
 	private List<String> mapFromTitle(List<Book> books) {
-		return books.stream().map(book -> book.getTitle()).collect(Collectors.toList());
+		return books.stream().map(book -> book.getTitle()).toList();
 	}
 
 }

@@ -41,7 +41,7 @@ public enum Genrer {
 
 	public static Genrer findByCode(Integer code) {
 		for (Genrer genrer : Genrer.values()) {
-			if (genrer.getCode() == code) {
+			if (genrer.getCode().equals(code)) {
 				return genrer;
 			}
 		}

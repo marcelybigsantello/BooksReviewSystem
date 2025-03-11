@@ -2,6 +2,10 @@ package com.masantello.booksreviewsystem.utils;
 
 public class Constants {
 	
+	private Constants() {
+		
+	}
+	
 	// Author
 	public static final String NOT_FOUND_ERROR = "Autor não encontrado";
 	public static final String AUTHOR_DOES_NOT_HAVE_BOOKS = "O autor possui livros cadastrados. Não é possível excluí-lo";

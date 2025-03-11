@@ -66,7 +66,7 @@ public class AuthorService {
 	
 	public void delete(String id) {
 		Author author = findById(id);
-		if (author.getBooks() != null && author.getBooks().size() > 0) {
+		if (author.getBooks() != null && !author.getBooks().isEmpty()) {
 			throw new DataIntegrityViolationsException(Constants.AUTHOR_DOES_NOT_HAVE_BOOKS);
 		}
 

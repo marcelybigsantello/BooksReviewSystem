@@ -80,8 +80,10 @@ public class BookService {
 
 		// Atualizando lista de livros do autor
 		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(), book.getAuthor().getGenrer());
-		author.get().addBook(book);
-		authorService.addNewBookOfAuthor(author.get());
+		if (author.isPresent()) {
+			author.get().addBook(book);
+			authorService.addNewBookOfAuthor(author.get());
+		}
 		return newDataBook;
 	}
 

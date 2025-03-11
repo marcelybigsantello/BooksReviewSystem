@@ -14,6 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 	
+	private ControllerExceptionHandler() {
+		
+	}
+	
 	@ExceptionHandler
 	public static ResponseEntity<StandardError> getObjectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
