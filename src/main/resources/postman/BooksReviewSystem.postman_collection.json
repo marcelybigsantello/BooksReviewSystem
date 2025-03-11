@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "bbb8f7ac-ce7e-4b44-9a8a-f7cd407c95dd",
+		"name": "BooksReviewSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30656390"
+	},
+	"item": [
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "All Authors",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:8082/authors"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert New Author",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"George Orwell\",\r\n    \"email\": \"georgeorwell@gmail.com\",\r\n    \"birthDate\": \"1903-06-25\",\r\n    \"genrer\": \"DYSTOPIAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/authors"
+					},
+					"response": []
+				},
+				{
+					"name": "One Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/authors/67b28c0c2791801923e90c53"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Agatha Christie\",\r\n    \"email\": \"agathachristie@microsoft.com\",\r\n    \"birthDate\": \"1890-09-15\",\r\n    \"genrer\": \"THRILLER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/authors/67b28c0c2791801923e90c53"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8082/authors/67945be813ff476be366d78a"
+					},
+					"response": []
+				},
+				{
+					"name": "Find Books of an Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/authors/67b28c0c2791801923e90c53/books"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/books"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert new Book of existing author",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"A Noite das Bruxas\",\r\n    \"description\": \"Em uma festa macabra de Dia das Bruxas organizada por Mrs. Ariadne Oliver, Joyce, uma adolescente com o costume de mentir para chamar a atenção, revela já ter testemunhado um assassinato. Ninguém acredita nela, mas, poucas horas depois, seu corpo é encontrado afogado próximo a uma bacia cheia de maçãs. Diante de um caso tão tenebroso, Mrs. Oliver decide pedir ajuda para a única pessoa que considera capaz de resolver um crime misterioso como esse e encontrar o culpado: o detetive Hercule Poirot. Com personagens intrigantes e cheios de segredos, a escrita brilhante de Agatha Christie não deixa de surpreender o leitor em mais um mistério de assassinato, resolvido com maestria.\",\r\n    \"editor\": \"HarperCollins\",\r\n    \"numberOfPages\": 240,\r\n    \"releaseDate\": \"2020-02-01\",\r\n    \"price\": 38.49,\r\n    \"quantityInSupply\": 5,\r\n    \"author\": {\r\n        \"name\": \"Agatha Christie\",\r\n        \"genrer\": \"THRILLER\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/books"
+					},
+					"response": []
+				},
+				{
+					"name": "One Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/books/67cfb8397e19767a2bbe4c86"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"67cfb8397e19767a2bbe4c86\",\r\n    \"title\": \"A Noite das Bruxas\",\r\n    \"description\": \"Em uma festa macabra de Dia das Bruxas organizada por Mrs. Ariadne Oliver, Joyce, uma adolescente com o costume de mentir para chamar a atenção, revela já ter testemunhado um assassinato. Ninguém acredita nela, mas, poucas horas depois, seu corpo é encontrado afogado próximo a uma bacia cheia de maçãs. Diante de um caso tão tenebroso, Mrs. Oliver decide pedir ajuda para a única pessoa que considera capaz de resolver um crime misterioso como esse e encontrar o culpado: o detetive Hercule Poirot. Com personagens intrigantes e cheios de segredos, a escrita brilhante de Agatha Christie não deixa de surpreender o leitor em mais um mistério de assassinato, resolvido com maestria.\",\r\n    \"editor\": \"HarperCollins\",\r\n    \"numberOfPages\": 240,\r\n    \"releaseDate\": \"2020-02-01\",\r\n    \"price\": 38.49,\r\n    \"quantityInSupply\": 5,\r\n    \"author\": {\r\n        \"name\": \"Agatha Christie\",\r\n        \"genrer\": \"THRILLER\"\r\n    },\r\n    \"reviews\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/books/67cfb8397e19767a2bbe4c86"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8082/books/67a047c3a1c5da60db3949cf"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "All Book's reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/reviews"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert new Review of a Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 9.5,\r\n    \"text\": \"Enredo e plano de crime muito bem desenvolvido, com uma história chocante e que te prende do início ao fim.\",\r\n    \"book\": {\r\n        \"title\": \"A noite das bruxas\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/reviews"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Review of a Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 7.5,\r\n    \"text\": \"Teste contendo nota com ponto flutuante\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/reviews/67ac0e177fa42a2c279dc5f8"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
