@@ -15,4 +15,7 @@ public interface AuthorRepository extends MongoRepository<Author, String> {
 	@Query("{ 'name': { $regex: ?0, $options: 'i' } }, { 'genrer': { $regex: ?0, $options: 'i' } }")
 	public Optional<Author> findByNameAndGenrer(@Param("name") String name, @Param("genrer") String genrer);
 
+	public Optional<Author> findByName(@Param("name") String name);
+
+	
 }

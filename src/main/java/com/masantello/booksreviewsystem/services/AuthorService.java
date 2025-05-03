@@ -34,20 +34,30 @@ public class AuthorService {
 	public Author findById(String id) {
 		Optional<Author> author = authorRepository.findById(id);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException(Constants.NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.AUTHOR_NOT_FOUND_ERROR);
 		}
 
 		return author.get();
 	}
 	
-	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
-		var author = authorRepository.findByNameAndGenrer(name, genrer);
+	public Optional<Author> findByName(String name) {
+		var author = authorRepository.findByName(name);
 		if (author.isEmpty()) {
-			throw new ObjectNotFoundException(Constants.NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(Constants.AUTHOR_NOT_FOUND_ERROR);
 		}
 		
 		return author;
 	}
+	
+	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
+		var author = authorRepository.findByNameAndGenrer(name, genrer);
+		if (author.isEmpty()) {
+			throw new ObjectNotFoundException(Constants.AUTHOR_NOT_FOUND_ERROR);
+		}
+		
+		return author;
+	}
+	
 
 	public Author update(Author author) {
 		Author newDataAuthor = findById(author.getId());
@@ -77,5 +87,7 @@ public class AuthorService {
 		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
 				authorDto.getBirthDate(), authorDto.getGenrer());
 	}
+
+	
 
 }

@@ -43,7 +43,7 @@ public class BookService {
 	}
 
 	public List<Book> findAll() {
-		return bookRepository.findAll();		
+		return bookRepository.findAll();
 	}
 
 	public Book findById(String id) {
@@ -53,6 +53,15 @@ public class BookService {
 		}
 
 		return book.get();
+	}
+
+	public List<Book> findAllByAnAuthor(String authorName) {
+		Optional<Author> author = authorService.findByName(authorName);
+		if (author.isPresent()) {			
+			Optional<List<Book>> booksByAnAuthor = bookRepository.findBooksByAnAuthor(authorName);
+			return booksByAnAuthor.get();
+		}
+		return null;
 	}
 
 	public Book findByTitle(String title) {
@@ -79,7 +88,8 @@ public class BookService {
 		bookRepository.save(newDataBook);
 
 		// Atualizando lista de livros do autor
-		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(), book.getAuthor().getGenrer());
+		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
+				book.getAuthor().getGenrer());
 		if (author.isPresent()) {
 			author.get().addBook(book);
 			authorService.addNewBookOfAuthor(author.get());
@@ -97,9 +107,8 @@ public class BookService {
 
 	public Book fromDto(BookDTO bookDto) {
 
-		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), 
-				bookDto.getEditor(), bookDto.getNumberOfPages(), bookDto.getReleaseDate(),
-				bookDto.getPrice(), bookDto.getQuantityInSupply(),
+		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
+				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
 				bookDto.getAuthor());
 	}
 

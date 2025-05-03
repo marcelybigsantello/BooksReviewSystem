@@ -43,6 +43,14 @@ public class BookController {
 		return ResponseEntity.ok().body(new BookDTO(book));
 	}
 	
+	@RequestMapping(value = "/allBooksFromAnAuthor/{authorName}", method = RequestMethod.GET)
+	public ResponseEntity<List<BookDTO>> findAllByAnAuthor(@PathVariable String authorName) {
+		List<Book> booksByAnAuthor = bookService.findAllByAnAuthor(authorName);
+		
+		List<BookDTO> booksByAnAuthorDto = booksByAnAuthor.stream().map(book -> new BookDTO(book)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(booksByAnAuthorDto);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookDTO> insert(@RequestBody BookDTO bookDto) {
 		Book book = bookService.fromDto(bookDto);
