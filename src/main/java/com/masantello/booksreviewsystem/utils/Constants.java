@@ -11,9 +11,10 @@ public class Constants {
 	public static final String AUTHOR_DOES_NOT_HAVE_BOOKS = "O autor possui livros cadastrados. Não é possível excluí-lo";
 	
 	// Book
-	public static final String BOOK_NOT_FOUND_ERROR = "Livro não encontrado";
+	public static final String BOOK_NOT_FOUND_ERROR = "Livro '%s' não encontrado";
 	public static final String BOOK_AUTHOR_NOT_REGISTERED = "Não foi possível inserir o livro. Favor cadastrar o autor.";
 	public static final String NOT_POSSIBLE_TO_DELETE_BOOK = "Não é possível excluir o livro, pois possui exemplares em estoque.";
+	public static final String BOOK_ALREADY_REGISTERED = "Livro de título '%s' já existe cadastrado.";
 	
 	// Review
 	public static final String REVIEW_BOOK_NOT_REGISTERED = "Não foi possível inserir a avaliação. Favor cadastrar o livro!";
