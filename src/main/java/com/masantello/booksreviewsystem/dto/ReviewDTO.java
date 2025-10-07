@@ -1,17 +1,16 @@
 package com.masantello.booksreviewsystem.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.masantello.booksreviewsystem.domain.Review;
 
 public class ReviewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
 	private Float rating;
 	private String text;
-	private LocalDateTime date;
+	private String date;
 	private BookSimplifiedDTO book;
 	
 	public ReviewDTO() {
@@ -19,26 +18,17 @@ public class ReviewDTO implements Serializable {
 	}
 	
 	public ReviewDTO(Review review) {
-		this.id = review.getId();
 		this.rating = review.getRating();
 		this.text = review.getText();
-		this.date = review.getDate();
+		this.date = review.getDate() == null ? null : review.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss"));
 		this.book = review.getBook();
 	}
 
-	public ReviewDTO(Float rating, String text, LocalDateTime date, BookSimplifiedDTO book) {
+	public ReviewDTO(Float rating, String text, String date, BookSimplifiedDTO book) {
 		this.rating = rating;
 		this.text = text;
 		this.date = date;
 		this.book = book;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Float getRating() {
@@ -57,11 +47,11 @@ public class ReviewDTO implements Serializable {
 		this.text = text;
 	}
 
-	public LocalDateTime getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

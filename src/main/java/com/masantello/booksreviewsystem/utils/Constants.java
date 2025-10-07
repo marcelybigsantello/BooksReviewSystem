@@ -20,5 +20,9 @@ public class Constants {
 	public static final String REVIEW_BOOK_NOT_REGISTERED = "Não foi possível inserir a avaliação. Favor cadastrar o livro!";
 	public static final String NULL_RATING_AND_FEEDBACK = "Número de estrelas e feedback nulos.";
 	public static final String UNKNOWN_REVIEW = "Avaliação inexistente";
+	public static final String NO_REVIEW_FOR_THAT_BOOK = "Nenhuma avaliação encontrada para o livro '%s'.";
+	
+	
+	
 	
 }

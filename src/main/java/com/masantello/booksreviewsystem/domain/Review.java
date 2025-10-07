@@ -2,6 +2,7 @@ package com.masantello.booksreviewsystem.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -39,6 +40,14 @@ public class Review implements Serializable {
 		this.date = date;
 		this.book = book;
 	}
+	
+	public Review(Float rating, String text, String date, BookSimplifiedDTO book) {
+		this.rating = rating;
+		this.text = text;
+		this.date = date == null ? null : LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss"));
+		this.book = book;
+	}
+
 
 	public String getId() {
 		return id;

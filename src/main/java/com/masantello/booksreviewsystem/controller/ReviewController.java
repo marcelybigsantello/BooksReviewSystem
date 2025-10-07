@@ -59,4 +59,15 @@ public class ReviewController {
 		return ResponseEntity.ok().body(new ReviewDTO(bookReview));
 	}
 	
+	//FindAllByBook
+	@RequestMapping(value = "/allReviewsFromOneBook/{bookTitle}", method = RequestMethod.GET)
+	public ResponseEntity<List<ReviewDTO>> findAllByBook(@PathVariable String bookTitle) {
+		List<Review> bookReview = service.findByBookTitle(bookTitle);
+
+		List<ReviewDTO> responseDTO = bookReview.stream().map(review -> new ReviewDTO(review))
+				.collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(responseDTO);
+	}
+	
 }
