@@ -12,6 +12,7 @@ import com.masantello.booksreviewsystem.dto.BookDTO;
 import com.masantello.booksreviewsystem.repositories.BookRepository;
 import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
+import com.masantello.booksreviewsystem.services.exception.ConflictException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
 import com.masantello.booksreviewsystem.utils.Constants;
 
@@ -28,6 +29,12 @@ public class BookService {
 	}
 
 	public Book insert(Book book) {
+
+		Optional<Book> bookOptional = bookRepository.findByTitle(book.getTitle());
+		if (bookOptional.isPresent()) {
+			throw new ConflictException(String.format(Constants.BOOK_ALREADY_REGISTERED, book.getTitle()));
+		}
+
 		var result = bookRepository.insert(book);
 
 		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
@@ -57,7 +64,7 @@ public class BookService {
 
 	public List<Book> findAllByAnAuthor(String authorName) {
 		Optional<Author> author = authorService.findByName(authorName);
-		if (author.isPresent()) {			
+		if (author.isPresent()) {
 			Optional<List<Book>> booksByAnAuthor = bookRepository.findBooksByAnAuthor(authorName);
 			return booksByAnAuthor.get();
 		}
@@ -70,7 +77,7 @@ public class BookService {
 		}
 		Optional<Book> book = bookRepository.findByTitle(title);
 		if (book.isEmpty()) {
-			throw new ObjectNotFoundException(Constants.BOOK_NOT_FOUND_ERROR);
+			throw new ObjectNotFoundException(String.format(Constants.BOOK_NOT_FOUND_ERROR, title));
 		}
 
 		return book.get();
@@ -106,7 +113,6 @@ public class BookService {
 	}
 
 	public Book fromDto(BookDTO bookDto) {
-
 		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
 				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
 				bookDto.getAuthor());
