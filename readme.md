@@ -2,7 +2,7 @@
 Books Review System
 
 ## Description
-Welcome to the Books Review System!! This system was designed to provide a friendly web interface, where you're able to register reviews of books you enjoyed reading! This is such an awesome opportunity to get in touch with real reviews of books before buying them, helping you to make better decisions. 
+Welcome to the Books Review System!! This system was designed to provide a friendly web interface, where you're able to register reviews of books you enjoyed reading! This is such an insightful opportunity to get in touch with real reviews of books before buying them, helping you to make better decisions. 
 I hope you really enjoy it!
 ![BooksUniverse](https://i.pinimg.com/originals/ec/5a/32/ec5a326418460e1c39df929b49ca6e6f.gif)
 
