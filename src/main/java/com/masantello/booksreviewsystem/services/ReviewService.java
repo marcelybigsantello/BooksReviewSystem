@@ -38,10 +38,9 @@ public class ReviewService {
 		Optional.ofNullable(bookService.findByTitle(bookTitle))
 			.orElseThrow(
 				() -> new ObjectNotFoundException(String.format(Constants.BOOK_NOT_FOUND_ERROR, bookTitle)));
-		
-		
+				
 
-		return reviewsRepository.findByBookTitle(bookTitle)
+		return reviewsRepository.findByBookTitleIgnoreCase(bookTitle)
 				.filter(reviews -> !reviews.isEmpty())
 				.orElseThrow(
 				() -> new NoSuchElementException(String.format(Constants.NO_REVIEW_FOR_THAT_BOOK, bookTitle)));

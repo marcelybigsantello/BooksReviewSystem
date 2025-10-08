@@ -11,7 +11,7 @@ import com.masantello.booksreviewsystem.domain.Review;
 @Repository
 public interface ReviewRepository extends MongoRepository<Review, String> {
 
-	Optional<List<Review>> findByBookTitle(String bookTitle);
+	Optional<List<Review>> findByBookTitleIgnoreCase(String bookTitle);
 	
 	Optional<Review> findByCount(Integer count);
 
