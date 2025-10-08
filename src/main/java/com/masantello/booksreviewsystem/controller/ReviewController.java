@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.masantello.booksreviewsystem.domain.Review;
+import com.masantello.booksreviewsystem.dto.BookDTO;
 import com.masantello.booksreviewsystem.dto.ReviewDTO;
 import com.masantello.booksreviewsystem.services.ReviewService;
 
@@ -50,13 +51,24 @@ public class ReviewController {
 	}
 	
 	//UPDATE
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<ReviewDTO> update(@RequestBody ReviewDTO reviewDto, @PathVariable String id) {
+	@RequestMapping(value = "/{count}", method = RequestMethod.PUT)
+	public ResponseEntity<ReviewDTO> update(@RequestBody ReviewDTO reviewDto, @PathVariable Integer count) {
 		Review bookReview = service.fromDto(reviewDto);
-		bookReview.setId(id);
+		bookReview.setCount(count);
 		bookReview = service.update(bookReview);
 		
 		return ResponseEntity.ok().body(new ReviewDTO(bookReview));
+	}
+	
+	//FindAllByBook
+	@RequestMapping(value = "/allReviewsFromOneBook", method = RequestMethod.GET)
+	public ResponseEntity<List<ReviewDTO>> findAllByBook(@RequestBody BookDTO bookDto) {
+		List<Review> bookReview = service.findByBookTitle(bookDto.getTitle());
+
+		List<ReviewDTO> responseDTO = bookReview.stream().map(review -> new ReviewDTO(review))
+				.collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(responseDTO);
 	}
 	
 }
