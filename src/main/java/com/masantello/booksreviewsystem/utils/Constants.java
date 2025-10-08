@@ -23,6 +23,4 @@ public class Constants {
 	public static final String NO_REVIEW_FOR_THAT_BOOK = "Nenhuma avaliação encontrada para o livro '%s'.";
 	
 	
-	
-	
 }

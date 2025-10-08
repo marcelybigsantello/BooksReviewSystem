@@ -38,6 +38,8 @@ public class ReviewService {
 		Optional.ofNullable(bookService.findByTitle(bookTitle))
 			.orElseThrow(
 				() -> new ObjectNotFoundException(String.format(Constants.BOOK_NOT_FOUND_ERROR, bookTitle)));
+		
+		
 
 		return reviewsRepository.findByBookTitle(bookTitle)
 				.filter(reviews -> !reviews.isEmpty())
@@ -51,8 +53,10 @@ public class ReviewService {
 		if (book == null) {
 			throw new DataIntegrityViolationsException(Constants.REVIEW_BOOK_NOT_REGISTERED);
 		}
-		review.getBook().setId(book.getId());
+		
 		review.setDate(LocalDateTime.now());
+		review.setCount(Math.toIntExact(reviewsRepository.count()) + 1);
+		review.getBook().setAuthorDto(book.getAuthor());
 
 		var result = reviewsRepository.insert(review);
 		book.addReview(review);
@@ -65,7 +69,7 @@ public class ReviewService {
 		if (newReview.getRating() == null && newReview.getText() == null) {
 			throw new BadRequestException(Constants.NULL_RATING_AND_FEEDBACK);
 		}
-		Review review = findById(newReview.getId());
+		Review review = findByCountNumber(newReview.getCount());
 		review.setRating(newReview.getRating());
 		review.setText(newReview.getText());
 		review.setDate(LocalDateTime.now());
@@ -77,8 +81,8 @@ public class ReviewService {
 		return review;
 	}
 
-	private Review findById(String id) {
-		Optional<Review> review = reviewsRepository.findById(id);
+	private Review findByCountNumber(Integer count) {
+		Optional<Review> review = reviewsRepository.findByCount(count);
 		if (review.isEmpty()) {
 			throw new ObjectNotFoundException(Constants.UNKNOWN_REVIEW);
 		}

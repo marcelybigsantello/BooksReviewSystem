@@ -19,6 +19,7 @@ public class Review implements Serializable {
 	private Float rating;
 	private String text;
 	private LocalDateTime date;
+	private Integer count;
 	
 	private BookSimplifiedDTO book;
 	
@@ -78,7 +79,15 @@ public class Review implements Serializable {
 	}
 
 	public void setDate(LocalDateTime date) {
-		this.date = date;
+		this.date = date;		
+	}
+	
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 	public BookSimplifiedDTO getBook() {

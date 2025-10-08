@@ -12,6 +12,8 @@ public class ReviewDTO implements Serializable {
 	private String text;
 	private String date;
 	private BookSimplifiedDTO book;
+	private Integer count;
+	
 	
 	public ReviewDTO() {
 		
@@ -22,6 +24,7 @@ public class ReviewDTO implements Serializable {
 		this.text = review.getText();
 		this.date = review.getDate() == null ? null : review.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss"));
 		this.book = review.getBook();
+		this.count = review.getCount();
 	}
 
 	public ReviewDTO(Float rating, String text, String date, BookSimplifiedDTO book) {
@@ -61,6 +64,10 @@ public class ReviewDTO implements Serializable {
 
 	public void setBook(BookSimplifiedDTO book) {
 		this.book = book;
+	}
+	
+	public Integer getCount() {
+		return count;
 	}
 	
 }

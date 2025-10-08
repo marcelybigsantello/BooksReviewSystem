@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class BookSimplifiedDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
-	private String title; 
+	private String title;
+	private AuthorSimplifiedDTO authorDto;
 	
 	public BookSimplifiedDTO() {
 		
@@ -17,21 +17,26 @@ public class BookSimplifiedDTO implements Serializable {
 		this.title = title;
 	}
 
-	public BookSimplifiedDTO(String id, String title) {
+	public BookSimplifiedDTO(String title, AuthorSimplifiedDTO authorDto) {
 		super();
-		this.id = id;
 		this.title = title;
-	}
-
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
+		this.authorDto = authorDto;
 	}
 
 	public String getTitle() {
 		return title;
 	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public AuthorSimplifiedDTO getAuthorDto() {
+		return authorDto;
+	}
+
+	public void setAuthorDto(AuthorSimplifiedDTO authorDto) {
+		this.authorDto = authorDto;
+	}
+	
 }
