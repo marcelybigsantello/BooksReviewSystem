@@ -28,11 +28,20 @@
 				{
 					"name": "Insert New Author",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"George Orwell\",\r\n    \"email\": \"georgeorwell@gmail.com\",\r\n    \"birthDate\": \"1903-06-25\",\r\n    \"genrer\": \"DYSTOPIAN\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Stephanie Garber\",\r\n    \"email\": \"stephaniegarber@gmail.com\",\r\n    \"birthDate\": \"1987-07-08\",\r\n    \"genrer\": \"FANTASY\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -48,7 +57,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8082/authors/67b28c0c2791801923e90c53"
+						"url": "http://localhost:8082/authors/68d34d49d8628e4fe7cc1f15"
 					},
 					"response": []
 				},
@@ -75,7 +84,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8082/authors/67945be813ff476be366d78a"
+						"url": "http://localhost:8082/authors/68d34d49d8628e4fe7cc1f15"
 					},
 					"response": []
 				},
@@ -109,7 +118,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"A Noite das Bruxas\",\r\n    \"description\": \"Em uma festa macabra de Dia das Bruxas organizada por Mrs. Ariadne Oliver, Joyce, uma adolescente com o costume de mentir para chamar a atenção, revela já ter testemunhado um assassinato. Ninguém acredita nela, mas, poucas horas depois, seu corpo é encontrado afogado próximo a uma bacia cheia de maçãs. Diante de um caso tão tenebroso, Mrs. Oliver decide pedir ajuda para a única pessoa que considera capaz de resolver um crime misterioso como esse e encontrar o culpado: o detetive Hercule Poirot. Com personagens intrigantes e cheios de segredos, a escrita brilhante de Agatha Christie não deixa de surpreender o leitor em mais um mistério de assassinato, resolvido com maestria.\",\r\n    \"editor\": \"HarperCollins\",\r\n    \"numberOfPages\": 240,\r\n    \"releaseDate\": \"2020-02-01\",\r\n    \"price\": 38.49,\r\n    \"quantityInSupply\": 5,\r\n    \"author\": {\r\n        \"name\": \"Agatha Christie\",\r\n        \"genrer\": \"THRILLER\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"title\": \"Caraval: Lembre-se, é apenas um jogo\",\r\n    \"description\": \"Bem vindos ao Caraval! O maior espetáculo na terra ou no mar. Aqui vocês conhecerão mais maravilhas do que a maioria das pessoas vê em toda uma vida. Mas, antes que entrem em nosso mundo, devem recordar que tudo é um jogo. O que acontece atrás desses portões pode assustar ou encantar, mas não deixem que nada os engane. Tentaremos convencer vocês de que é real, porém tudo é teatro.Então, apesar de queremos vê-los arrebatados, cuidado; não se deixem levar longe demais. \",\r\n    \"editor\": \"Novo Conceito\",\r\n    \"numberOfPages\": 352,\r\n    \"releaseDate\": \"2020-02-01\",\r\n    \"price\": 48.90,\r\n    \"quantityInSupply\": 10,\r\n    \"author\": {\r\n        \"name\": \"Stephanie Garber\",\r\n        \"genrer\": \"FANTASY\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,7 +134,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8082/books/67cfb8397e19767a2bbe4c86"
+						"url": "http://localhost:8082/books/67b284572791801923e90c4b"
+					},
+					"response": []
+				},
+				{
+					"name": "All Books from an Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8082/books/allBooksFromAnAuthor/Stephanie%20Garber"
 					},
 					"response": []
 				},
@@ -152,7 +170,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8082/books/67a047c3a1c5da60db3949cf"
+						"url": "http://localhost:8082/books/68d34eb2d8628e4fe7cc1f16"
 					},
 					"response": []
 				}
@@ -177,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 9.5,\r\n    \"text\": \"Enredo e plano de crime muito bem desenvolvido, com uma história chocante e que te prende do início ao fim.\",\r\n    \"book\": {\r\n        \"title\": \"A noite das bruxas\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"rating\": 9.0,\r\n    \"text\": \"Interessante.\",\r\n    \"book\": {\r\n        \"title\": \"1984\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,14 +213,35 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 7.5,\r\n    \"text\": \"Teste contendo nota com ponto flutuante\"\r\n}",
+							"raw": "{\r\n    \"rating\": 9.8,\r\n    \"text\": \"Excelente e intrigante leitura.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8082/reviews/67ac0e177fa42a2c279dc5f8"
+						"url": "http://localhost:8082/reviews/67b284572791801923e90c48"
+					},
+					"response": []
+				},
+				{
+					"name": "All Reviews from one Book",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"A Noite das Bruxas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/reviews/allReviewsFromOneBook"
 					},
 					"response": []
 				}
