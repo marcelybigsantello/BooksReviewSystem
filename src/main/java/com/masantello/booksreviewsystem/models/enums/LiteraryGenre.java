@@ -1,6 +1,6 @@
-package com.masantello.booksreviewsystem.domain.enums;
+package com.masantello.booksreviewsystem.models.enums;
 
-public enum Genrer {
+public enum LiteraryGenre {
 
 	ACTION(1, "Action"),
 	ADVENTURE(2, "Adventure"),
@@ -26,7 +26,7 @@ public enum Genrer {
 	private Integer code;
 	private String description;
 	
-	private Genrer(Integer code, String description) {
+	private LiteraryGenre(Integer code, String description) {
 		this.code = code;
 		this.description = description;
 	}
@@ -39,8 +39,8 @@ public enum Genrer {
 		return description;
 	}
 
-	public static Genrer findByCode(Integer code) {
-		for (Genrer genrer : Genrer.values()) {
+	public static LiteraryGenre findByCode(Integer code) {
+		for (LiteraryGenre genrer : LiteraryGenre.values()) {
 			if (genrer.getCode().equals(code)) {
 				return genrer;
 			}
@@ -48,8 +48,8 @@ public enum Genrer {
 		return null;
 	}
 	
-	public static Genrer findByDescription(String description) {
-		for (Genrer genrer : Genrer.values()) {
+	public static LiteraryGenre findByDescription(String description) {
+		for (LiteraryGenre genrer : LiteraryGenre.values()) {
 			if (genrer.getDescription().equalsIgnoreCase(description)) {
 				return genrer;
 			}

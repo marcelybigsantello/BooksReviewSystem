@@ -2,7 +2,7 @@ package com.masantello.booksreviewsystem.dto;
 
 import java.io.Serializable;
 
-import com.masantello.booksreviewsystem.domain.enums.Genrer;
+import com.masantello.booksreviewsystem.models.enums.LiteraryGenre;
 
 public class AuthorSimplifiedDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class AuthorSimplifiedDTO implements Serializable {
 
 	}
 
-	public AuthorSimplifiedDTO(String name, Genrer genrer) {
+	public AuthorSimplifiedDTO(String name, LiteraryGenre genrer) {
 		super();
 		this.name = name;
 		this.genrer = genrer.getDescription();

@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.masantello.booksreviewsystem.domain.Book;
-import com.masantello.booksreviewsystem.domain.Review;
 import com.masantello.booksreviewsystem.dto.ReviewDTO;
+import com.masantello.booksreviewsystem.models.Book;
+import com.masantello.booksreviewsystem.models.Review;
 import com.masantello.booksreviewsystem.repositories.ReviewRepository;
 import com.masantello.booksreviewsystem.services.exception.BadRequestException;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;

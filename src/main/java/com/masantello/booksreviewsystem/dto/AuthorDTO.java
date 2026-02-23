@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.masantello.booksreviewsystem.domain.Author;
-import com.masantello.booksreviewsystem.domain.Book;
-import com.masantello.booksreviewsystem.domain.enums.Genrer;
+import com.masantello.booksreviewsystem.models.Author;
+import com.masantello.booksreviewsystem.models.Book;
+import com.masantello.booksreviewsystem.models.enums.LiteraryGenre;
 
 public class AuthorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class AuthorDTO implements Serializable {
 	private String name;
 	private String email;
 	private LocalDate birthDate;
-	private Genrer genrer;
+	private LiteraryGenre genrer;
 	private List<String> books;
 	
 	public AuthorDTO() {
@@ -64,11 +64,11 @@ public class AuthorDTO implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public Genrer getGenrer() {
+	public LiteraryGenre getGenrer() {
 		return genrer;
 	}
 
-	public void setGenrer(Genrer genrer) {
+	public void setGenrer(LiteraryGenre genrer) {
 		this.genrer = genrer;
 	}
 

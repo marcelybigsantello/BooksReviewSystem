@@ -1,4 +1,4 @@
-package com.masantello.booksreviewsystem.domain;
+package com.masantello.booksreviewsystem.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;

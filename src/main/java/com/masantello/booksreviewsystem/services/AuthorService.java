@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.masantello.booksreviewsystem.domain.Author;
 import com.masantello.booksreviewsystem.dto.AuthorDTO;
+import com.masantello.booksreviewsystem.models.Author;
 import com.masantello.booksreviewsystem.repositories.AuthorRepository;
 import com.masantello.booksreviewsystem.services.exception.DataIntegrityViolationsException;
 import com.masantello.booksreviewsystem.services.exception.ObjectNotFoundException;
