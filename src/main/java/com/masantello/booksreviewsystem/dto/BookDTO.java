@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.masantello.booksreviewsystem.domain.Book;
-import com.masantello.booksreviewsystem.domain.Review;
+import com.masantello.booksreviewsystem.models.Book;
+import com.masantello.booksreviewsystem.models.Review;
 
 public class BookDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

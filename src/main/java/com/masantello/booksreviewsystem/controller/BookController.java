@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.masantello.booksreviewsystem.domain.Book;
 import com.masantello.booksreviewsystem.dto.BookDTO;
+import com.masantello.booksreviewsystem.models.Book;
 import com.masantello.booksreviewsystem.services.BookService;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.masantello.booksreviewsystem.domain;
+package com.masantello.booksreviewsystem.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.masantello.booksreviewsystem.domain.enums.Genrer;
+import com.masantello.booksreviewsystem.models.enums.LiteraryGenre;
 
 @Document(collection = "author")
 public class Author implements Serializable {
@@ -21,7 +21,7 @@ public class Author implements Serializable {
 	private String name;
 	private String email;
 	private LocalDate birthDate;
-	private Genrer genrer;
+	private LiteraryGenre genrer;
 	
 	@DBRef
 	private List<Book> books = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Author implements Serializable {
 		
 	}
 
-	public Author(String id, String name, String email, LocalDate birthDate, Genrer genrer) {
+	public Author(String id, String name, String email, LocalDate birthDate, LiteraryGenre genrer) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,11 +71,11 @@ public class Author implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public Genrer getGenrer() {
+	public LiteraryGenre getGenrer() {
 		return genrer;
 	}
 
-	public void setGenrer(Genrer genrer) {
+	public void setGenrer(LiteraryGenre genrer) {
 		this.genrer = genrer;
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.masantello.booksreviewsystem.domain.Book;
+import com.masantello.booksreviewsystem.models.Book;
 
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
