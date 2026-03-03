@@ -30,12 +30,12 @@ public class AuthorDTO implements Serializable {
 	private List<String> books;
 
 	public AuthorDTO(Author author) {
-		AuthorDTO authorDTO = new AuthorDTO();
-		authorDTO.setId(author.getId());
-		authorDTO.setName(author.getName());
-		authorDTO.setEmail(author.getEmail());
-		authorDTO.setBirthDate(author.getBirthDate());
-		authorDTO.setLiteraryGenre(author.getLiteraryGenre());
+		this.id = author.getId();
+		this.name = author.getName();
+		this.email = author.getEmail();
+		this.birthDate = author.getBirthDate();
+		this.literaryGenre = author.getLiteraryGenre();
+		this.books = mapFromTitle(author.getBooks());
 	}
 	
 	private List<String> mapFromTitle(List<Book> books) {
