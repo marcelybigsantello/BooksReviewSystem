@@ -57,7 +57,6 @@ public class AuthorService {
 		
 		return author;
 	}
-	
 
 	public Author update(Author author) {
 		Author newDataAuthor = findById(author.getId());
