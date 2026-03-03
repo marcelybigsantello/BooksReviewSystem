@@ -37,8 +37,8 @@ public class BookService {
 
 		var result = bookRepository.insert(book);
 
-		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
-				book.getAuthor().getGenrer());
+		Optional<Author> author = authorService.findByNameAndLiteraryGenre(book.getAuthor().getName(),
+				book.getAuthor().getLiteraryGenre());
 		if (author.isEmpty()) {
 			throw new DataIntegrityViolationsException(Constants.BOOK_AUTHOR_NOT_REGISTERED);
 		}
@@ -95,8 +95,8 @@ public class BookService {
 		bookRepository.save(newDataBook);
 
 		// Atualizando lista de livros do autor
-		Optional<Author> author = authorService.findByNameAndGenrer(book.getAuthor().getName(),
-				book.getAuthor().getGenrer());
+		Optional<Author> author = authorService.findByNameAndLiteraryGenre(book.getAuthor().getName(),
+				book.getAuthor().getLiteraryGenre());
 		if (author.isPresent()) {
 			author.get().addBook(book);
 			authorService.addNewBookOfAuthor(author.get());

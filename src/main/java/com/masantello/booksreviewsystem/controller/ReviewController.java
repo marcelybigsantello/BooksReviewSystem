@@ -40,7 +40,7 @@ public class ReviewController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	//FINDALL
+	//FindAll
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ReviewDTO>> findAll() {
 		List<Review> bookReviews = service.findAll();

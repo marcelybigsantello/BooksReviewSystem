@@ -49,8 +49,8 @@ public class AuthorService {
 		return author;
 	}
 	
-	public Optional<Author> findByNameAndGenrer(String name, String genrer) {
-		var author = authorRepository.findByNameAndGenrer(name, genrer);
+	public Optional<Author> findByNameAndLiteraryGenre(String name, String literaryGenre) {
+		var author = authorRepository.findByNameAndGenrer(name, literaryGenre);
 		if (author.isEmpty()) {
 			throw new ObjectNotFoundException(Constants.AUTHOR_NOT_FOUND_ERROR);
 		}
@@ -64,7 +64,7 @@ public class AuthorService {
 		newDataAuthor.setName(author.getName());
 		newDataAuthor.setEmail(author.getEmail());
 		newDataAuthor.setBirthDate(author.getBirthDate());
-		newDataAuthor.setGenrer(author.getGenrer());
+		newDataAuthor.setLiteraryGenre(author.getLiteraryGenre());
 		authorRepository.save(newDataAuthor);
 		
 		return newDataAuthor;
@@ -85,9 +85,6 @@ public class AuthorService {
 
 	public Author fromDto(AuthorDTO authorDto) {
 		return new Author(authorDto.getId(), authorDto.getName(), authorDto.getEmail(), 
-				authorDto.getBirthDate(), authorDto.getGenrer());
+				authorDto.getBirthDate(), authorDto.getLiteraryGenre());
 	}
-
-	
-
 }

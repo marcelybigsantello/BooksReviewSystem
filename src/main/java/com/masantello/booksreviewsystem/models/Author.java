@@ -1,11 +1,13 @@
 package com.masantello.booksreviewsystem.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,76 +15,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.masantello.booksreviewsystem.models.enums.LiteraryGenre;
 
 @Document(collection = "author")
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Author implements Serializable {
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	@Id
+	@NonNull
 	private String id;
+	@NonNull
 	private String name;
+	@NonNull
 	private String email;
+	@NonNull
 	private LocalDate birthDate;
-	private LiteraryGenre genrer;
+	@NonNull
+	private LiteraryGenre literaryGenre;
 	
 	@DBRef
 	private List<Book> books = new ArrayList<>();
-	
-	public Author() {
-		
-	}
 
-	public Author(String id, String name, String email, LocalDate birthDate, LiteraryGenre genrer) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.genrer = genrer;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public LiteraryGenre getGenrer() {
-		return genrer;
-	}
-
-	public void setGenrer(LiteraryGenre genrer) {
-		this.genrer = genrer;
-	}
-
-	public List<Book> getBooks() {
-		return books;
-	}
-	
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
