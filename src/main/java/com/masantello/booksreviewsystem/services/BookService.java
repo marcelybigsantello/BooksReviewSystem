@@ -3,6 +3,7 @@ package com.masantello.booksreviewsystem.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.masantello.booksreviewsystem.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,13 @@ public class BookService {
 
 	private final BookRepository bookRepository;
 	private final AuthorService authorService;
+	private final BookMapper bookMapper;
 
 	@Autowired
-	public BookService(BookRepository bookRepository, AuthorService authorService) {
+	public BookService(BookRepository bookRepository, AuthorService authorService, BookMapper bookMapper) {
 		this.bookRepository = bookRepository;
 		this.authorService = authorService;
+		this.bookMapper = bookMapper;
 	}
 
 	public Book insert(Book book) {
@@ -113,9 +116,7 @@ public class BookService {
 	}
 
 	public Book fromDto(BookDTO bookDto) {
-		return new Book(bookDto.getId(), bookDto.getTitle(), bookDto.getDescription(), bookDto.getEditor(),
-				bookDto.getNumberOfPages(), bookDto.getReleaseDate(), bookDto.getPrice(), bookDto.getQuantityInSupply(),
-				bookDto.getAuthor());
+		return bookMapper.convertToModel(bookDto);
 	}
 
 	public void addOrUpdateReviewOfBook(Book book) {

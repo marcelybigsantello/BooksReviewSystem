@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import com.masantello.booksreviewsystem.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,13 @@ public class ReviewService {
 
 	private final ReviewRepository reviewsRepository;
 	private final BookService bookService;
+	private final ReviewMapper reviewMapper;
 
 	@Autowired
-	public ReviewService(ReviewRepository reviewsRepository, BookService bookService) {
+	public ReviewService(ReviewRepository reviewsRepository, BookService bookService, ReviewMapper reviewMapper) {
 		this.reviewsRepository = reviewsRepository;
 		this.bookService = bookService;
+		this.reviewMapper = reviewMapper;
 	}
 
 	public List<Review> findAll() {
@@ -90,7 +93,7 @@ public class ReviewService {
 	}
 
 	public Review fromDto(ReviewDTO reviewDto) {
-		return new Review(reviewDto.getRating(), reviewDto.getText(), reviewDto.getDate(), reviewDto.getBook());
+		return reviewMapper.convertToModel(reviewDto);
 	}
 
 }
