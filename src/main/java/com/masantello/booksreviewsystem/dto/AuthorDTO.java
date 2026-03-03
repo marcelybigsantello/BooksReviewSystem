@@ -1,5 +1,6 @@
 package com.masantello.booksreviewsystem.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -7,76 +8,38 @@ import java.util.List;
 import com.masantello.booksreviewsystem.models.Author;
 import com.masantello.booksreviewsystem.models.Book;
 import com.masantello.booksreviewsystem.models.enums.LiteraryGenre;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuthorDTO implements Serializable {
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
 	private String name;
 	private String email;
 	private LocalDate birthDate;
-	private LiteraryGenre genrer;
+	private LiteraryGenre literaryGenre;
 	private List<String> books;
-	
-	public AuthorDTO() {
-		
-	}
 
 	public AuthorDTO(Author author) {
-		super();
 		this.id = author.getId();
 		this.name = author.getName();
 		this.email = author.getEmail();
 		this.birthDate = author.getBirthDate();
-		this.genrer = author.getGenrer();
+		this.literaryGenre = author.getLiteraryGenre();
 		this.books = mapFromTitle(author.getBooks());
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public LiteraryGenre getGenrer() {
-		return genrer;
-	}
-
-	public void setGenrer(LiteraryGenre genrer) {
-		this.genrer = genrer;
-	}
-
-	public List<String> getBooks() {
-		return books;
 	}
 	
 	private List<String> mapFromTitle(List<Book> books) {
+
 		return books.stream().map(book -> book.getTitle()).toList();
 	}
 

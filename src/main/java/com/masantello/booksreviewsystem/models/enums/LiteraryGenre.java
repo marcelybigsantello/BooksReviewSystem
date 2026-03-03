@@ -1,11 +1,16 @@
 package com.masantello.booksreviewsystem.models.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum LiteraryGenre {
 
 	ACTION(1, "Action"),
 	ADVENTURE(2, "Adventure"),
 	BIOGRAPHY(3, "Biography"),
-	CHILDRENS(4, "Children's"),
+	CHILDREN(4, "Children"),
 	FANTASY(5, "Fantasy"),
 	DYSTOPIAN(6, "Dystopian"),
 	FOOD_AND_DRINK(7, "Food and Drink"),
@@ -23,35 +28,22 @@ public enum LiteraryGenre {
 	THRILLER(19, "Thriller"),
 	TRUE_CRIME(20, "True Crime");
 	
-	private Integer code;
-	private String description;
-	
-	private LiteraryGenre(Integer code, String description) {
-		this.code = code;
-		this.description = description;
-	}
-
-	public Integer getCode() {
-		return code;
-	}
-
-	public String getDescription() {
-		return description;
-	}
+	private final Integer code;
+	private final String description;
 
 	public static LiteraryGenre findByCode(Integer code) {
-		for (LiteraryGenre genrer : LiteraryGenre.values()) {
-			if (genrer.getCode().equals(code)) {
-				return genrer;
+		for (LiteraryGenre genre : LiteraryGenre.values()) {
+			if (genre.getCode().equals(code)) {
+				return genre;
 			}
 		}
 		return null;
 	}
 	
 	public static LiteraryGenre findByDescription(String description) {
-		for (LiteraryGenre genrer : LiteraryGenre.values()) {
-			if (genrer.getDescription().equalsIgnoreCase(description)) {
-				return genrer;
+		for (LiteraryGenre genre : LiteraryGenre.values()) {
+			if (genre.getDescription().equalsIgnoreCase(description)) {
+				return genre;
 			}
 		}
 		return null;
